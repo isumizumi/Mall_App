@@ -22,6 +22,9 @@
 	</head>
 
 	<body>
+		<div id="app">
+
+
 	<!-- Navbar will come here -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
@@ -34,80 +37,19 @@
 	    	</button>
 	    	<a class="navbar-brand" href="#" style="font-size:16pt"><strong>Mall App</strong></a>
 	    </div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li style="padding-left:500px;">&nbsp;</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size:16pt"><strong>Directory</strong><b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" @click="selectMall('Aeon')">Aeon</a></li>
-								<li><a href="#" @click="selectMall('Bintaro Jaya Xchange')">Bintaro Jaya Xchange</a></li>
-								<li><a href="#" @click="selectMall('Central Park')">Central Park</a></li>
-								<li><a href="#" @click="selectMall('Emporium')">Emporium</a></li>
-								<li class="divider"></li>
-								<li><a href="#" @click="selectMall('Gandaria City')">Gandaria City</a></li>
-								<li><a href="#" @click="selectMall('Grand Indonesia')">Grand Indonesia</a></li>
-								<li><a href="#" @click="selectMall('Kota Kasablanca')">Kota Kasablanca</a></li>
-								<li><a href="#" @click="selectMall('Plaza Indonesia')">Plaza Indonesia</a></li>
-								<li class="divider"></li>
-								<li><a href="#" @click="selectMall('Plaza Senayan')">Plaza Senayan</a></li>
-								<li><a href="#" @click="selectMall('Pluit Village')">Pluit Village</a></li>
-								<li><a href="#" @click="selectMall('Senayan City')">Senayan City</a></li>
-								<li><a href="#" @click="selectMall('Taman Anggrek')">Taman Anggrek</a></li>
-							</ul>
-					</li>
-				</ul>
-			</div>
+
 		</div>
 		<br><br><br>
 	</nav>
 	<!-- end navbar -->
-
-	<div class="wrapper">
-		<div class="navbar navbar-inverse navbar-fixed-left">
-			<ul class="nav navbar-nav">
-				<br><br>
-				<li class="active"><center><strong>Floor</strong></center></li>
-				<li class="active"><a href="#"><center><strong>G</strong></center></a></li>
-				<li><a href="#"><center><strong>F</strong></center></a></li>
-				<li><a href="#"><center><strong>1</strong></center></a></li>
-				<li><a href="#"><center><strong>2</strong></center></a></li>
-				<li><a href="#"><center><strong>3</strong></center></a></li>
-				<li><a href="#"><center><strong>4</strong></center></a></li>
-			</ul>
+	<div class="container">
+		<div class="row">
+			<p>{{ message }}</p>
+			<button class="btn btn-primary" @click="fbLogin()">
+				Login via Facebook
+			</button>
 		</div>
-
-		<div class="container">
-	    <div class="row">
-	      <div style="width:100%;float:left;padding-left:0;padding-top:0;padding-right:0;">
-	        <div class="panel panel-default">
-	          <div style="background-color:#9c27b0;color:#fff" class="panel-heading">
-	            <h3 class="panel-title"><center><b>Directory Details</b></h3>
-	          </div>
-	          <ul class="list-group">
-	            <li class="list-group-item">
-								<span style="float:left"><b>Category1</b></span>
-								<span style="padding-left:40%"><b>Category2</b></span>
-								<span style="float:right"><b>Category3</b></span>
-								<br><br><br>
-							</li>
-							<li class="list-group-item">
-								<span style="float:left"><b>Category1</b></span>
-								<span style="padding-left:40%"><b>Category2</b></span>
-								<span style="float:right"><b>Category3</b></span>
-								<br><br><br>
-							</li>
-							<li class="list-group-item">
-								<span style="float:left"><b>Category1</b></span>
-								<span style="padding-left:40%"><b>Category2</b></span>
-								<span style="float:right"><b>Category3</b></span>
-								<br><br><br>
-							</li>
-	          </ul>
-	        </div>
-	      </div>
-			</div>
-		</div>
+	</div>
 	</div>
 	</body>
 
@@ -124,5 +66,31 @@
 
 	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 	<script src="assets/js/material-kit.js" type="text/javascript"></script>
-
+	<script>
+		var host = "https://22cbcec3.ngrok.io/api"
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!'
+			},
+			methods: {
+				fbLogin(){
+					console.log('run');
+				},
+				selectMall(mall) {
+					axios.get('/store/search/name', {
+							params: {
+								ID: 12345
+							}
+						})
+						.then(function(response) {
+							console.log(response);
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+				}
+			}
+		})
+	</script>
 </html>
